@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript Closure</title>
+</head>
+<body>
+    <div></div>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // init
+            const div = document.getElementsByTagName("div").item(0);
+            const buttonText = document.createTextNode("Don't enter");
+            div.appendChild(document.createElement("button")).setAttribute("type", "button");
+            const btn = div.getElementsByTagName("button").item(0);
+            btn.appendChild(buttonText) 
+
+            //f(btn);
+            f2(btn);
+
+        });
+        
+
+        function f(button) {
+            let i = 0;    
+            button.addEventListener('click', () => {
+                return (() => {
+                    console.log(i);
+                    i++;
+                })();
+            });
+        }
+
+        function f2(button) {
+            let i = 0;    
+            button.addEventListener('click', () => {
+                return (index => {
+                    console.log(index);
+                    i++;
+                })(i);
+            });
+        }
+
+
+    </script>
+</body>
+</html>
